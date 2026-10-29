@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percy Jackson Story RPG</title>
+
+<style>
+body{
+background:#101820;
+color:white;
+font-family:Georgia,serif;
+padding:20px;
+}
+
+button{
+display:block;
+width:100%;
+padding:15px;
+margin:10px 0;
+font-size:18px;
+}
+
+#story{
+font-size:22px;
+margin-bottom:20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🏕️ Camp Half-Blood</h1>
+
+<div id="story"></div>
+
+<div id="choices"></div>
+
+<script>
+
+window.onload = function(){
+
+const story = document.getElementById("story");
+const choices = document.getElementById("choices");
+
+story.innerHTML =
+"The campfire crackles beneath the stars. A glowing symbol appears above your head.";
+
+const button1 = document.createElement("button");
+button1.textContent = "Look up proudly";
+
+button1.onclick = function(){
+story.innerHTML =
+"Poseidon has claimed you! 🔱";
+choices.innerHTML = "";
+};
+
+choices.appendChild(button1);
+
+};
+
+</script>
+
+</body>
+</html>
