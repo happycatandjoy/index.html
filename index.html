@@ -1,528 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Camp Half-Blood: The Prophecy</title>
+
+<style>
+
+body{
+background:#101820;
+color:white;
+font-family:Georgia,serif;
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+button{
+display:block;
+width:100%;
+padding:15px;
+margin:8px 0;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#3a6ea5;
+color:white;
+}
+
+#story{
+font-size:22px;
+line-height:1.6;
+margin-bottom:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🏕️ Camp Half-Blood: The Prophecy</h1>
+
+<div id="story">
+Loading...
+</div>
+
+<div id="choices">
+</div>
+
+<script>
+
+let game={
+name:"Demigod",
+courage:0,
+wisdom:0,
+chaos:0,
+friendship:0,
+secrets:0,
+companion:"None"
+};
+
+function show(text){
+document.getElementById("story").innerHTML=text;
+}
+
+function choice(options){
+
+const box=
+document.getElementById("choices");
+
+box.innerHTML="";
+
+for(const option of options){
+
+const btn=
+document.createElement("button");
+
+btn.textContent=
+option.text;
+
+btn.onclick=
+option.action;
+
+box.appendChild(btn);
+
+}
+}
+
 function chapterOne(){
-
-show(`
-CHAPTER 1
-
-The campfire crackles beneath the stars.
-
-For weeks you have trained at Camp Half-Blood.
-
-Suddenly, a glowing symbol appears above your head.
-
-The entire camp gasps.
-
-You have been claimed.
-
-What do you do?
-`);
-
-choice([
-
-{
-text:"🔱 Raise your weapon proudly",
-action:function(){
-
-game.courage++;
-
-claimed();
-
+...
 }
-},
-
-{
-text:"🤫 Pretend nothing happened",
-action:function(){
-
-game.wisdom++;
-
-claimed();
-
-}
-},
-
-{
-text:"😂 Ask if being claimed comes with free blue cookies",
-action:function(){
-
-game.chaos++;
-
-claimed();
-
-}
-},
-
-{
-text:"🏃 Run away screaming",
-action:function(){
-
-game.chaos+=2;
-
-claimed();
-
-}
-}
-
-]);
-
-}
-
-function claimed(){
-
-show(`
-Chiron approaches.
-
-"Interesting."
-
-Before discussing your future,
-which cabin would you like to visit?
-`);
-
-choice([
-
-{
-text:"🦉 Athena Cabin",
-action:function(){
-
-game.wisdom++;
-
-cabinResult();
-
-}
-},
-
-{
-text:"⚔️ Ares Cabin",
-action:function(){
-
-game.courage++;
-
-cabinResult();
-
-}
-},
-
-{
-text:"👜 Hermes Cabin",
-action:function(){
-
-game.chaos++;
-
-cabinResult();
-
-}
-},
-
-{
-text:"💀 Hades Cabin",
-action:function(){
-
-game.secrets++;
-
-cabinResult();
-
-}
-}
-
-]);
-
-}
-
-function cabinResult(){
-
-show(`
-The day passes quickly.
-
-Campers whisper about the new demigod.
-
-As night falls, you wonder how you should spend your first evening.
-`);
-
-choice([
-
-{
-text:"Talk with campers",
-action:function(){
-
-game.friendship++;
-
-chapterTwo();
-
-}
-},
-
-{
-text:"Train alone",
-action:function(){
-
-game.courage++;
-
-chapterTwo();
-
-}
-},
-
-{
-text:"Study in Athena Cabin",
-action:function(){
-
-game.wisdom++;
-
-chapterTwo();
-
-}
-},
-
-{
-text:"Steal extra dessert",
-action:function(){
-
-game.chaos++;
-
-chapterTwo();
-
-}
-}
-
-]);
-
-}
-
 function chapterTwo(){
+...
+}
 
 show(`
-CHAPTER 2
+🏕️ Camp Half-Blood
 
-The next morning a satyr bursts into the Big House.
-
-"A Pegasus is missing!"
-
-Chiron looks directly at you.
-
-"This will be your first quest."
-
-How do you begin?
+Game loaded successfully.
 `);
 
 choice([
-
 {
-text:"🌲 Search the forest",
-action:forestRoute
-},
-
-{
-text:"🕵️ Question witnesses",
-action:witnessRoute
-},
-
-{
-text:"🔮 Visit the Oracle",
-action:oracleRoute
-},
-
-{
-text:"😴 Ignore the quest",
-action:function(){
-
-game.chaos++;
-
-companionChoice();
-
+text:"Start Adventure",
+action:chapterOne
 }
-}
-
 ]);
 
-}
+</script>
 
-function forestRoute(){
-
-show(`
-You enter the forest.
-
-Broken branches litter the ground.
-
-Huge hoofprints disappear between the trees.
-
-Something chased the Pegasus.
-`);
-
-game.courage++;
-
-companionChoice();
-
-}
-
-function witnessRoute(){
-
-show(`
-You spend hours questioning campers.
-
-One child of Hermes heard growling.
-
-Another swears they saw something huge
-moving through the woods.
-`);
-
-game.wisdom++;
-
-companionChoice();
-
-}
-
-function oracleRoute(){
-
-show(`
-Green mist fills the cave.
-
-The Oracle whispers:
-
-"Feathers flee.
-
-Horns follow.
-
-A beast guards the secret."
-
-You leave with more questions than answers.
-`);
-
-game.secrets++;
-
-companionChoice();
-
-}
-
-function companionChoice(){
-
-show(`
-Before leaving camp,
-someone offers to join your quest.
-
-Who do you choose?
-`);
-
-choice([
-
-{
-text:"🦉 Annabeth",
-action:function(){
-
-game.companion="Annabeth";
-game.wisdom++;
-
-campfireScene();
-
-}
-},
-
-{
-text:"🐐 Grover",
-action:function(){
-
-game.companion="Grover";
-game.friendship++;
-
-campfireScene();
-
-}
-},
-
-{
-text:"💀 Nico",
-action:function(){
-
-game.companion="Nico";
-game.secrets++;
-
-campfireScene();
-
-}
-},
-
-{
-text:"⚔️ Go Alone",
-action:function(){
-
-game.companion="None";
-game.courage++;
-
-campfireScene();
-
-}
-}
-
-]);
-
-}
-
-function campfireScene(){
-
-show(`
-That evening the campfire burns brightly.
-
-${game.companion} sits beside you.
-
-What do you do?
-`);
-
-choice([
-
-{
-text:"Tell a funny story",
-action:function(){
-
-game.friendship++;
-
-minotaurScene();
-
-}
-},
-
-{
-text:"Ask about their past",
-action:function(){
-
-game.wisdom++;
-
-minotaurScene();
-
-}
-},
-
-{
-text:"Offer blue cookies",
-action:function(){
-
-game.friendship+=2;
-
-minotaurScene();
-
-}
-},
-
-{
-text:"Show off",
-action:function(){
-
-game.chaos++;
-
-minotaurScene();
-
-}
-},
-
-{
-text:"Watch the stars quietly",
-action:function(){
-
-game.secrets++;
-
-minotaurScene();
-
-}
-}
-
-]);
-
-}
-
-function minotaurScene(){
-
-show(`
-The next day your quest leads deep into the forest.
-
-Suddenly a roar shakes the trees.
-
-A massive Minotaur emerges.
-
-What do you do?
-`);
-
-choice([
-
-{
-text:"⚔️ Attack",
-action:minotaurEnd
-},
-
-{
-text:"🛡️ Dodge",
-action:minotaurEnd
-},
-
-{
-text:"🧠 Trick it",
-action:function(){
-
-game.wisdom++;
-
-minotaurEnd();
-
-}
-},
-
-{
-text:"🌲 Climb a tree",
-action:function(){
-
-game.chaos++;
-
-minotaurEnd();
-
-}
-},
-
-{
-text:"🏃 Hide",
-action:function(){
-
-game.secrets++;
-
-minotaurEnd();
-
-}
-},
-
-{
-text:"🏴 Challenge it to Capture the Flag",
-action:function(){
-
-game.chaos+=2;
-
-minotaurEnd();
-
-}
-}
-
-]);
-
-}
-
-function minotaurEnd(){
-
-show(`
-After an exhausting battle,
-the Minotaur retreats.
-
-Behind a shattered tree,
-you discover a strange black symbol.
-
-A Titan symbol.
-
-Someone sent the monster.
-
-TO BE CONTINUED...
-
-CHAPTER 3 BEGINS...
-`);
-
-choice([
-
-{
-text:"Continue to Chapter 3",
-action:chapterThree
-}
-
-]);
-
-}
+</body>
+</html>
