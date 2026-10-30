@@ -88,7 +88,6 @@ box.appendChild(btn);
 
 }
 }
-
 function chapterOne(){
 
 show(`
@@ -96,39 +95,58 @@ CHAPTER 1
 
 The campfire crackles beneath the stars.
 
+A glowing symbol appears above your head.
+
 You have been claimed.
 
 What do you do?
 `);
 
-}
-
-function chapterTwo(){
-
-show(`
-CHAPTER 2
-
-A Pegasus is missing.
-
-Chiron sends you on your first quest.
-`);
-
-}
-
-show(`
-🏕️ Camp Half-Blood
-
-Game loaded successfully.
-`);
-
 choice([
+
 {
-text:"Start Adventure",
-action:chapterOne
+text:"🔱 Raise your weapon proudly",
+action:function(){
+
+show(`
+Campers cheer.
+
+Chiron nods approvingly.
+
+"You may have potential."
+`);
+
+chapterTwo();
+
 }
-]);
+},
 
-</script>
+{
+text:"🤫 Pretend nothing happened",
+action:function(){
 
-</body>
-</html>
+show(`
+You stare at the ground.
+
+The campers seem confused.
+
+Chiron raises an eyebrow.
+`);
+
+chapterTwo();
+
+}
+},
+
+{
+text:"😂 Ask if being claimed comes with free blue cookies",
+action:function(){
+
+show(`
+Several campers laugh.
+
+One camper actually gives you a cookie.
+`);
+
+
+A satyr bursts into the Big Hou
