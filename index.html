@@ -3,11 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Camp Half-Blood: The Prophecy</title>
 
 <style>
-
 body{
 background:#101820;
 color:white;
@@ -45,6 +43,12 @@ button:hover{
 background:#4f86c6;
 }
 
+input{
+width:100%;
+padding:12px;
+font-size:18px;
+margin-bottom:10px;
+}
 </style>
 </head>
 
@@ -53,35 +57,33 @@ background:#4f86c6;
 <h1>🏕️ Camp Half-Blood: The Prophecy</h1>
 
 <div id="story"></div>
-
 <div id="choices"></div>
 
 <script>
 
-const story =
-document.getElementById("story");
+const story = document.getElementById("story");
+const choices = document.getElementById("choices");
 
-const choices =
-document.getElementById("choices");
+let game = {
+name:"",
+parent:""
+};
 
 function show(text){
-story.innerHTML=text;
+story.innerHTML = text;
 }
 
 function choice(options){
 
-choices.innerHTML="";
+choices.innerHTML = "";
 
 for(const option of options){
 
-const btn =
-document.createElement("button");
+const btn = document.createElement("button");
 
-btn.textContent =
-option.text;
+btn.textContent = option.text;
 
-btn.onclick =
-option.action;
+btn.onclick = option.action;
 
 choices.appendChild(btn);
 
@@ -91,8 +93,7 @@ choices.appendChild(btn);
 
 window.onload = function(){
 
-const save =
-localStorage.getItem("campSave");
+const save = localStorage.getItem("campSave");
 
 if(save){
 
@@ -107,17 +108,14 @@ Godly Parent: ${game.parent}
 `);
 
 choice([
-
 {
 text:"▶ Continue Adventure",
 action:startGame
 },
-
 {
 text:"🗑 New Character",
 action:characterCreation
 }
-
 ]);
 
 }
@@ -129,46 +127,22 @@ characterCreation();
 
 };
 
-
-let game = {
-name:"",
-parent:"",
-rememberMe:false
-};
-
 function characterCreation(){
 
 show(`
-🚨 TEST VERSION 🚨
+🏕️ Welcome to Camp Half-Blood!
 
-If you can read this,
-the new code loaded.
+Enter your name:
 `);
 
 choices.innerHTML = `
-<input id="playerName"
-placeholder="Name"
-style="width:100%;padding:12px;font-size:18px;margin-bottom:10px;">
+<input id="playerName" placeholder="Enter your name">
 
-<button onclick="chooseParent('Poseidon')">
-🔱 Poseidon
-</button>
-
-<button onclick="chooseParent('Athena')">
-🦉 Athena
-</button>
-
-<button onclick="chooseParent('Apollo')">
-☀️ Apollo
-</button>
-
-<button onclick="chooseParent('Hades')">
-💀 Hades
-</button>
-
-<button onclick="randomCharacter()">
-🎲 Random Character
-</button>
+<button onclick="chooseParent('Poseidon')">🔱 Poseidon</button>
+<button onclick="chooseParent('Athena')">🦉 Athena</button>
+<button onclick="chooseParent('Apollo')">☀️ Apollo</button>
+<button onclick="chooseParent('Hades')">💀 Hades</button>
+<button onclick="randomCharacter()">🎲 Random Character</button>
 `;
 
 }
@@ -180,10 +154,9 @@ game.parent = parent;
 const enteredName =
 document.getElementById("playerName").value;
 
-game.name =
-enteredName || "Demigod";
+game.name = enteredName || "Demigod";
 
-rememberMe();
+saveCharacter();
 
 }
 
@@ -192,8 +165,8 @@ function randomCharacter(){
 const names = [
 "Leo",
 "Hazel",
-"Jason",
 "Piper",
+"Jason",
 "Nico",
 "Annabeth",
 "Alex"
@@ -212,11 +185,11 @@ names[Math.floor(Math.random()*names.length)];
 game.parent =
 parents[Math.floor(Math.random()*parents.length)];
 
-rememberMe();
+saveCharacter();
 
 }
 
-function rememberMe(){
+function saveCharacter(){
 
 show(`
 Welcome ${game.name}!
@@ -251,23 +224,10 @@ startGame();
 }
 }
 
-startGame();
-
-}
-}
-
-};
-
-
-}
-}
-
 ]);
 
 }
 
-
-    
 function startGame(){
 
 show(`
@@ -341,12 +301,6 @@ chapterTwo();
 
 function chapterTwo(){
 
-choice([
-
-{
-text:"Continue",
-action:function(){
-
 show(`
 CHAPTER 2
 
@@ -364,7 +318,7 @@ How do you begin?
 choice([
 
 {
-text:"🌲 Search the forest",
+text:"🌲 Search the Forest",
 action:function(){
 
 show(`
@@ -383,13 +337,13 @@ A Titan symbol.
 TO BE CONTINUED...
 `);
 
-ending();
+endDemo();
 
 }
 },
 
 {
-text:"🕵️ Question witnesses",
+text:"🕵️ Question Witnesses",
 action:function(){
 
 show(`
@@ -404,7 +358,7 @@ you discover a strange Titan symbol.
 TO BE CONTINUED...
 `);
 
-ending();
+endDemo();
 
 }
 },
@@ -431,7 +385,7 @@ you discover a Titan symbol.
 TO BE CONTINUED...
 `);
 
-ending();
+endDemo();
 
 }
 }
@@ -439,39 +393,30 @@ ending();
 ]);
 
 }
-}
 
-]);
-
-}
-
-function ending(){
+function endDemo(){
 
 choice([
 
 {
-text:"End Demo",
+text:"🏕️ End Demo",
 action:function(){
 
 show(`
-🏕️ Thanks for playing!
+Thanks for playing!
 
-You have completed Chapters 1 and 2.
+Coming Soon:
 
-Coming Next:
+🕵️ Chapter 3 - Titan Traitor
 
-🕵️ Chapter 3: The Titan Traitor
-
-🐍 Chapter 4: Medusa's Garden
+🐍 Chapter 4 - Medusa
 
 👑 Multiple Endings
-
-🔱 More Choices
 
 💙 Friendship Routes
 `);
 
-choices.innerHTML="";
+choices.innerHTML = "";
 
 }
 }
@@ -484,3 +429,4 @@ choices.innerHTML="";
 
 </body>
 </html>
+
