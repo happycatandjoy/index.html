@@ -89,9 +89,46 @@ choices.appendChild(btn);
 
 }
 
-window.onload = function() {
-    startGame();
+window.onload = function(){
+
+const save =
+localStorage.getItem("campSave");
+
+if(save){
+
+game = JSON.parse(save);
+
+show(`
+🏕️ Welcome Back!
+
+Name: ${game.name}
+
+Godly Parent: ${game.parent}
+`);
+
+choice([
+
+{
+text:"▶ Continue Adventure",
+action:startGame
+},
+
+{
+text:"🗑 New Character",
+action:characterCreation
+}
+
+]);
+
+}
+else{
+
+characterCreation();
+
+}
+
 };
+
 
 let game = {
 name:"",
@@ -209,8 +246,10 @@ startGame();
 text:"❌ No Thanks",
 action:function(){
 
-window.onload = function(){
+startGame();
 
+}
+}
 const save =
 localStorage.getItem("campSave");
 
