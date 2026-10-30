@@ -255,41 +255,6 @@ startGame();
 
 }
 }
-const save =
-localStorage.getItem("campSave");
-
-if(save){
-
-game = JSON.parse(save);
-
-show(`
-🏕️ Welcome Back!
-
-Name: ${game.name}
-
-Godly Parent: ${game.parent}
-`);
-
-choice([
-
-{
-text:"▶ Continue Adventure",
-action:startGame
-},
-
-{
-text:"🗑 New Character",
-action:characterCreation
-}
-
-]);
-
-}
-else{
-
-characterCreation();
-
-}
 
 };
 
