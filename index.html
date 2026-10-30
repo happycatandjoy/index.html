@@ -17,6 +17,17 @@ margin:auto;
 padding:20px;
 }
 
+h1{
+text-align:center;
+}
+
+#story{
+font-size:22px;
+line-height:1.6;
+margin-bottom:20px;
+min-height:150px;
+}
+
 button{
 display:block;
 width:100%;
@@ -27,75 +38,67 @@ border:none;
 border-radius:10px;
 background:#3a6ea5;
 color:white;
+cursor:pointer;
 }
 
-#story{
-font-size:22px;
-line-height:1.6;
-margin-bottom:20px;
+button:hover{
+background:#4f86c6;
 }
 
 </style>
-
 </head>
 
 <body>
 
 <h1>🏕️ Camp Half-Blood: The Prophecy</h1>
 
-<div id="story">
-Loading...
-</div>
+<div id="story"></div>
 
-<div id="choices">
-</div>
+<div id="choices"></div>
 
 <script>
 
-let game={
-name:"Demigod",
-courage:0,
-wisdom:0,
-chaos:0,
-friendship:0,
-secrets:0,
-companion:"None"
-};
+const story =
+document.getElementById("story");
+
+const choices =
+document.getElementById("choices");
 
 function show(text){
-document.getElementById("story").innerHTML=text;
+story.innerHTML=text;
 }
 
 function choice(options){
 
-const box=
-document.getElementById("choices");
-
-box.innerHTML="";
+choices.innerHTML="";
 
 for(const option of options){
 
-const btn=
+const btn =
 document.createElement("button");
 
-btn.textContent=
+btn.textContent =
 option.text;
 
-btn.onclick=
+btn.onclick =
 option.action;
 
-box.appendChild(btn);
+choices.appendChild(btn);
 
 }
+
 }
-function chapterOne(){
+
+startGame();
+
+function startGame(){
 
 show(`
-CHAPTER 1
-
 The campfire crackles beneath the stars.
 
 A glowing symbol appears above your head.
+
+The entire camp gasps.
 
 You have been claimed.
 
@@ -111,9 +114,24 @@ action:function(){
 show(`
 Campers cheer.
 
-Chiron nods approvingly.
+Chiron smiles.
 
 "You may have potential."
+`);
+
+chapterTwo();
+
+}
+},
+
+{
+text:"😂 Ask if being claimed comes with blue cookies",
+action:function(){
+
+show(`
+Several campers laugh.
+
+One camper actually gives you a blue cookie.
 `);
 
 chapterTwo();
@@ -126,27 +144,162 @@ text:"🤫 Pretend nothing happened",
 action:function(){
 
 show(`
-You stare at the ground.
+The campers stare.
 
-The campers seem confused.
-
-Chiron raises an eyebrow.
+Chiron looks confused.
 `);
 
 chapterTwo();
 
 }
-},
+}
+
+]);
+
+}
+
+function chapterTwo(){
+
+choice([
 
 {
-text:"😂 Ask if being claimed comes with free blue cookies",
+text:"Continue",
 action:function(){
 
 show(`
-Several campers laugh.
+CHAPTER 2
 
-One camper actually gives you a cookie.
+The next morning a satyr bursts into the Big House.
+
+"A Pegasus is missing!"
+
+Chiron points directly at you.
+
+"This will be your first quest."
+
+How do you begin?
 `);
 
+choice([
 
-A satyr bursts into the Big Hou
+{
+text:"🌲 Search the forest",
+action:function(){
+
+show(`
+You enter the forest.
+
+Huge hoofprints disappear into the trees.
+
+Something chased the Pegasus.
+
+Then...
+
+you find a strange black symbol carved into a tree.
+
+A Titan symbol.
+
+TO BE CONTINUED...
+`);
+
+ending();
+
+}
+},
+
+{
+text:"🕵️ Question witnesses",
+action:function(){
+
+show(`
+Campers report hearing growls.
+
+One camper swears they saw glowing eyes.
+
+Following the clues,
+
+you discover a strange Titan symbol.
+
+TO BE CONTINUED...
+`);
+
+ending();
+
+}
+},
+
+{
+text:"🔮 Visit the Oracle",
+action:function(){
+
+show(`
+Green mist fills the cave.
+
+The Oracle whispers:
+
+"Feathers flee.
+
+Horns follow.
+
+The enemy comes."
+
+Outside the cave,
+
+you discover a Titan symbol.
+
+TO BE CONTINUED...
+`);
+
+ending();
+
+}
+}
+
+]);
+
+}
+}
+
+]);
+
+}
+
+function ending(){
+
+choice([
+
+{
+text:"End Demo",
+action:function(){
+
+show(`
+🏕️ Thanks for playing!
+
+You have completed Chapters 1 and 2.
+
+Coming Next:
+
+🕵️ Chapter 3: The Titan Traitor
+
+🐍 Chapter 4: Medusa's Garden
+
+👑 Multiple Endings
+
+🔱 More Choices
+
+💙 Friendship Routes
+`);
+
+choices.innerHTML="";
+
+}
+}
+
+]);
+
+}
+
+</script>
+
+</body>
+</html>
