@@ -93,10 +93,178 @@ window.onload = function() {
     startGame();
 };
 
+let game = {
+name:"",
+parent:"",
+rememberMe:false
+};
 
+function characterCreation(){
+
+show(`
+🏕️ Welcome to Camp Half-Blood!
+
+Enter your name:
+`);
+
+choices.innerHTML = `
+<input id="playerName"
+placeholder="Name"
+style="width:100%;padding:12px;font-size:18px;margin-bottom:10px;">
+
+<button onclick="chooseParent('Poseidon')">
+🔱 Poseidon
+</button>
+
+<button onclick="chooseParent('Athena')">
+🦉 Athena
+</button>
+
+<button onclick="chooseParent('Apollo')">
+☀️ Apollo
+</button>
+
+<button onclick="chooseParent('Hades')">
+💀 Hades
+</button>
+
+<button onclick="randomCharacter()">
+🎲 Random Character
+</button>
+`;
+
+}
+
+function chooseParent(parent){
+
+game.parent = parent;
+
+const enteredName =
+document.getElementById("playerName").value;
+
+game.name =
+enteredName || "Demigod";
+
+rememberMe();
+
+}
+
+function randomCharacter(){
+
+const names = [
+"Leo",
+"Hazel",
+"Jason",
+"Piper",
+"Nico",
+"Annabeth",
+"Alex"
+];
+
+const parents = [
+"Poseidon",
+"Athena",
+"Apollo",
+"Hades"
+];
+
+game.name =
+names[Math.floor(Math.random()*names.length)];
+
+game.parent =
+parents[Math.floor(Math.random()*parents.length)];
+
+rememberMe();
+
+}
+
+function rememberMe(){
+
+show(`
+Welcome ${game.name}!
+
+Child of ${game.parent}.
+
+Would you like the game to remember you?
+`);
+
+choice([
+
+{
+text:"✅ Remember Me",
+action:function(){
+
+localStorage.setItem(
+"campSave",
+JSON.stringify(game)
+);
+
+startGame();
+
+}
+},
+
+{
+text:"❌ No Thanks",
+action:function(){
+
+window.onload = function(){
+
+const save =
+localStorage.getItem("campSave");
+
+if(save){
+
+game = JSON.parse(save);
+
+show(`
+🏕️ Welcome Back!
+
+Name: ${game.name}
+
+Godly Parent: ${game.parent}
+`);
+
+choice([
+
+{
+text:"▶ Continue Adventure",
+action:startGame
+},
+
+{
+text:"🗑 New Character",
+action:characterCreation
+}
+
+]);
+
+}
+else{
+
+characterCreation();
+
+}
+
+};
+
+
+}
+}
+
+]);
+
+}
+
+
+    
 function startGame(){
 
 show(`
+Welcome ${game.name}!
+
+Child of ${game.parent}.
+
 The campfire crackles beneath the stars.
 
 A glowing symbol appears above your head.
